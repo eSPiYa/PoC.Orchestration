@@ -1,0 +1,18 @@
+services:
+  pocorchestrationngwebui:
+    image: ${DOCKER_REGISTRY-}pocorchestrationngwebui
+    build:
+      context: ./ngwebui
+      dockerfile: dockerfile
+    volumes:      
+      - "./ngwebui:/app"
+      - alpine-node-modules:/app/node_modules
+
+  poc.orchestration.api:
+    image: ${DOCKER_REGISTRY-}pocorchestrationapi
+    build:
+      context: .
+      dockerfile: PoC.Orchestration.Api/Dockerfile
+
+volumes:
+  alpine-node-modules:
