@@ -32,8 +32,7 @@ export class AppSignalRService {
 
   receiveMessage(): Observable<string> {
     return new Observable<string>((observer) => {
-      this.hubConnection.on('ReceiveMessage', (message: string) => {
-        console.log('Message Received: ' + message);
+      this.hubConnection.on('ReceiveMessage', (message: string) => {        
         observer.next(message);
       });
     });
