@@ -1,4 +1,18 @@
 services:
+  proxy:
+    image: nginx:latest
+    ports:      
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./ProxyServers/Nginx/nginx.conf:/etc/nginx/nginx.conf
+    secrets:
+      - nginx.cert
+      - nginx.key
+      - dhparam.pem
+    stdin_open: true
+    tty: true  
+
   pocorchestrationngwebui:
     image: ${DOCKER_REGISTRY-}pocorchestrationngwebui
     build:
@@ -13,6 +27,14 @@ services:
     build:
       context: .
       dockerfile: PoC.Orchestration.Api/Dockerfile
+
+secrets:
+  nginx.cert: 
+    file: ./ProxyServers/Certificates/selfsigned.crt
+  nginx.key: 
+    file: ./ProxyServers/Certificates/selfsigned.key
+  dhparam.pem:
+    file: ./ProxyServers/Certificates/dhparam.pem
 
 volumes:
   alpine-node-modules:
