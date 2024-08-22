@@ -11,7 +11,10 @@ services:
       - nginx.key
       - dhparam.pem
     stdin_open: true
-    tty: true  
+    tty: true
+    depends_on:
+      - pocorchestrationngwebui
+      - poc.orchestration.api
 
   pocorchestrationngwebui:
     image: ${DOCKER_REGISTRY-}pocorchestrationngwebui
@@ -21,6 +24,8 @@ services:
     volumes:      
       - "./ngwebui:/app"
       - alpine-node-modules:/app/node_modules
+    depends_on:
+      - poc.orchestration.api
 
   poc.orchestration.api:
     image: ${DOCKER_REGISTRY-}pocorchestrationapi
