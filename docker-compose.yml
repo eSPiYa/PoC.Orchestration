@@ -16,6 +16,16 @@ services:
       - pocorchestrationngwebui
       - poc.orchestration.api
 
+  redis:
+    image: redis:alpine
+    restart: always
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+  
   pocorchestrationngwebui:
     image: ${DOCKER_REGISTRY-}pocorchestrationngwebui
     build:
@@ -32,6 +42,9 @@ services:
     build:
       context: .
       dockerfile: PoC.Orchestration.Api/Dockerfile
+    depends_on:
+      redis:
+        condition: service_healthy
 
 secrets:
   nginx.cert: 
