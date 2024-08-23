@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Configuration;
+using PoC.Orchestration.Api.Extensions;
 using PoC.Orchestration.Api.Hubs;
 using StackExchange.Redis;
 
@@ -16,6 +17,8 @@ builder.Services.AddSignalR()
                     options.Configuration.ChannelPrefix = RedisChannel.Literal("signalr");
                 });
 
+builder.Services.AddWorkflow();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,5 +33,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapHub<RealTimeHub>("/hubs/realtimehub");
+
+app.Services.RegisterWorkFlows();
 
 app.Run();
