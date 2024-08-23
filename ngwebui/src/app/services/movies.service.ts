@@ -30,9 +30,9 @@ export class MoviesService {
     });
   }
 
-  receiveMessage(): Observable<string> {
+  receiveMoviesList(): Observable<string> {
     return new Observable<string>((observer) => {
-      this.hubConnection.on('ReceiveMessage', (message: string) => {
+      this.hubConnection.on('ReceiveMoviesList', (message: string) => {
         observer.next(message);
       });
     });

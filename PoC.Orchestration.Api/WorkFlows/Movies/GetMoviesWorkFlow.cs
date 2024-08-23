@@ -33,7 +33,7 @@ namespace PoC.Orchestration.Api.WorkFlows.Movies
                     .Input(step => step.ApiReadAccessToken, data => this.ApiReadAccessToken)
                     .Output(data => data.GetMoviesHttpResponse, step => step.ResponseContent)
                 .Then<SignalRCallAsync<MoviesHub>>()
-                    .Input(step => step.Method, data => "ReceiveMessage")
+                    .Input(step => step.Method, data => "ReceiveMoviesList")
                     .Input(step => step.Message, data => data.GetMoviesHttpResponse)
                 .EndWorkflow();
         }

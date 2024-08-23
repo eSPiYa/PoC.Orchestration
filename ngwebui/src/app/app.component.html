@@ -282,8 +282,11 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <button type="button" (click)="getMovies()">Get Movies</button>
 
-
-<input type="text" [(ngModel)]="textBoxValue" placeholder="Enter something">
-<button type="button" (click)="logTextBoxValue()">Log Value</button>
-
+@if(moviesList && moviesList.results && moviesList.results.length > 0){
+  @for(movie of moviesList.results; track movie.id){
+  <div>
+    Title: {{movie.title}}
+  </div>
+  }
+}
 <router-outlet />

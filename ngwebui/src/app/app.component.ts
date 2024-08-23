@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms'
-import { AppSignalRService } from './app-signalr.service';
 import { MoviesService } from './services/movies.service'
 
 @Component({
@@ -13,34 +12,19 @@ import { MoviesService } from './services/movies.service'
 })
 export class AppComponent implements OnInit {
   title = 'ngwebui';
+  moviesList: any;
   receivedMessage: string = "";
   textBoxValue: string = '';
 
-  constructor(private signalRService: AppSignalRService,
-              private moviesService: MoviesService) { }
+  constructor(private moviesService: MoviesService) { }
 
   ngOnInit(): void {
-    this.signalRService.startConnection().subscribe(() => {
-      this.signalRService.receiveMessage().subscribe((message) => {
-        console.log('Message Received: ' + message);
-        this.receivedMessage = message;
-      });
-    });
-
     this.moviesService.startConnection().subscribe(() => {
-      this.moviesService.receiveMessage().subscribe((message) => {
-        console.log('Message Received from Movies: ' + message);
+      this.moviesService.receiveMoviesList().subscribe((message) => {
+        this.moviesList = JSON.parse(message);
+        console.log(this.moviesList);
       });
     });
-  }
-
-  logTextBoxValue() {
-    //console.log('Textbox value:', this.textBoxValue);
-    this.sendMessage(this.textBoxValue);
-  }
-
-  sendMessage(message: string): void {
-    this.signalRService.sendMessage(message);
   }
 
   getMovies(): void {
