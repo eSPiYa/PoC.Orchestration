@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms'
 import { AppSignalRService } from './app-signalr.service';
+import { MoviesService } from './services/movies.service'
 
 @Component({
   selector: 'app-root',
@@ -15,13 +16,20 @@ export class AppComponent implements OnInit {
   receivedMessage: string = "";
   textBoxValue: string = '';
 
-  constructor(private signalRService: AppSignalRService) { }
+  constructor(private signalRService: AppSignalRService,
+              private moviesService: MoviesService) { }
 
   ngOnInit(): void {
     this.signalRService.startConnection().subscribe(() => {
       this.signalRService.receiveMessage().subscribe((message) => {
         console.log('Message Received: ' + message);
         this.receivedMessage = message;
+      });
+    });
+
+    this.moviesService.startConnection().subscribe(() => {
+      this.moviesService.receiveMessage().subscribe((message) => {
+        console.log('Message Received from Movies: ' + message);
       });
     });
   }
@@ -33,5 +41,9 @@ export class AppComponent implements OnInit {
 
   sendMessage(message: string): void {
     this.signalRService.sendMessage(message);
+  }
+
+  getMovies(): void {
+    this.moviesService.getMoviesList();
   }
 }

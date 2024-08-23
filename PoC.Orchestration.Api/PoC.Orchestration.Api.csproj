@@ -15,4 +15,8 @@
     <PackageReference Include="WorkflowCore" Version="3.10.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="WorkFlows\DataModels\" />
+  </ItemGroup>
+
 </Project>

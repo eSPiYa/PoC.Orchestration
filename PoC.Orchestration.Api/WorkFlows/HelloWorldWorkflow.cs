@@ -8,6 +8,14 @@ namespace PoC.Orchestration.Api.WorkFlows
     {
         public readonly static string ID = "HelloWorld";
 
+        private readonly IConfiguration configuration;
+
+        public HelloWorldWorkflow(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
+
+        #region IWorkflow
         public string Id => ID;
         public int Version => 1;
 
@@ -17,5 +25,6 @@ namespace PoC.Orchestration.Api.WorkFlows
                 .StartWith<HelloWorldStep>()
                 .Then<ByeStep>();
         }
+        #endregion
     }
 }

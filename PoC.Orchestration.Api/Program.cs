@@ -18,6 +18,7 @@ builder.Services.AddSignalR()
                 });
 
 builder.Services.AddWorkflow();
+builder.Services.RegisterWorkFlowSteps();
 
 var app = builder.Build();
 
@@ -33,6 +34,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapHub<RealTimeHub>("/hubs/realtimehub");
+app.MapHub<MoviesHub>("/hubs/movieshub");
 
 app.Services.RegisterWorkFlows();
 
