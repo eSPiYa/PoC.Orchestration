@@ -6,7 +6,8 @@
       "serviceActions": {
         "poc.orchestration.api": "StartDebugging",
         "pocorchestrationngwebui": "StartWithoutDebugging",
-        "proxy": "StartWithoutDebugging"
+        "proxy": "StartWithoutDebugging",
+        "poc.orchestration.orchestrator": "StartDebugging"
       }
     }
   }

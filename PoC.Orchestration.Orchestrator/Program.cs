@@ -1,6 +1,4 @@
-using PoC.Orchestration.Api.Hubs;
-using PoC.Orchestration.Api.Services;
-using StackExchange.Redis;
+using PoC.Orchestration.Orchestrator.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,13 +8,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSignalR()
-                .AddStackExchangeRedis("redis", options =>
-                {
-                    options.Configuration.ChannelPrefix = RedisChannel.Literal("signalr");
-                });
 
-builder.Services.AddTransient<WebApiService>();
+builder.Services.AddWorkflow();
 
 var app = builder.Build();
 
@@ -31,6 +24,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapHub<MoviesHub>("/hubs/movieshub");
+app.Services.RegisterWorkFlows();
 
 app.Run();

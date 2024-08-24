@@ -9,6 +9,10 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "ngwebui", "ngwebui\ngwebui.esproj", "{FF604FA7-8050-4250-B4D5-537279E47DB6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoC.Orchestration.Orchestrator", "PoC.Orchestration.Orchestrator\PoC.Orchestration.Orchestrator.csproj", "{DA22A1A8-6124-44E2-B4EB-C4972ABD41BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoC.Orchestration.Common", "PoC.Orchestration.Common\PoC.Orchestration.Common.csproj", "{811F73CD-790C-42DD-9E8B-225A77D2EFA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +33,14 @@ Global
 		{FF604FA7-8050-4250-B4D5-537279E47DB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF604FA7-8050-4250-B4D5-537279E47DB6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FF604FA7-8050-4250-B4D5-537279E47DB6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{DA22A1A8-6124-44E2-B4EB-C4972ABD41BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA22A1A8-6124-44E2-B4EB-C4972ABD41BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA22A1A8-6124-44E2-B4EB-C4972ABD41BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA22A1A8-6124-44E2-B4EB-C4972ABD41BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{811F73CD-790C-42DD-9E8B-225A77D2EFA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{811F73CD-790C-42DD-9E8B-225A77D2EFA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{811F73CD-790C-42DD-9E8B-225A77D2EFA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{811F73CD-790C-42DD-9E8B-225A77D2EFA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

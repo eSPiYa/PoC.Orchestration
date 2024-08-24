@@ -1,0 +1,6 @@
+@PoC.Orchestration.Orchestrator_HostAddress = http://localhost:5015
+
+GET {{PoC.Orchestration.Orchestrator_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

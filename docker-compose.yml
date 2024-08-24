@@ -49,6 +49,15 @@ services:
       redis:
         condition: service_healthy
 
+  poc.orchestration.orchestrator:
+    image: ${DOCKER_REGISTRY-}pocorchestrationorchestrator
+    build:
+      context: .
+      dockerfile: PoC.Orchestration.Orchestrator/Dockerfile
+    environment:
+      - tmdb__api__key=${TMDB_API_KEY}
+      - tmdb__api__ReadAccessToken=${TMDB_API_READ_ACCESS_TOKEN}
+
 secrets:
   nginx.cert: 
     file: ./ProxyServers/Certificates/selfsigned.crt

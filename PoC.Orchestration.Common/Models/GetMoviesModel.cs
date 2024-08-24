@@ -1,13 +1,16 @@
-﻿namespace PoC.Orchestration.Api.WorkFlows.Movies.DataModels
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PoC.Orchestration.Common.Models
 {
-    public class GetMoviesParams
+    public class GetMoviesModel
     {
         public string FetchType { get; set; } = FetchTypesList.NowPlaying;
         public int Page { get; set; } = 1;
         public string LanguageCode { get; set; } = "en-US";
-        public string GetMoviesHttpResponse { get; set; }
-
-        public GetMoviesParams() { }
 
         public static class FetchTypesList
         {

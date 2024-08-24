@@ -1,32 +1,35 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using PoC.Orchestration.Api.WorkFlows.Movies;
-using PoC.Orchestration.Api.WorkFlows.Movies.DataModels;
-using WorkflowCore.Interface;
-using static PoC.Orchestration.Api.WorkFlows.Movies.DataModels.GetMoviesParams;
+using PoC.Orchestration.Api.Services;
+using PoC.Orchestration.Common.Models;
+using PoC.Orchestration.Common.WorkFlows;
+using System.Text.Json;
 
 namespace PoC.Orchestration.Api.Hubs
 {
     public class MoviesHub : Hub
     {
-        private readonly IWorkflowHost workflowHost;
+        private readonly WebApiService webApiService;
 
-        public MoviesHub(IWorkflowHost workflowHost)
+        public MoviesHub(WebApiService webApiService)
         {
-            this.workflowHost = workflowHost;
+            this.webApiService = webApiService;
         }
 
         public async Task GetMoviesList()
         {
-            var data = new GetMoviesParams
+            var payload = new GetMoviesModel
             {
-                FetchType = FetchTypesList.Popular,
+                FetchType = GetMoviesModel.FetchTypesList.Popular,
                 Page = 1
             };
 
-            await Task.Run(() =>
-            {   
-                this.workflowHost.StartWorkflow(GetMoviesWorkFlow.ID, 1, data, this.Context.ConnectionId);
-            });            
+            var headers = new Dictionary<string, string>()
+            {
+                { "connectionId", this.Context.ConnectionId },
+                { "workflowId", nameof(WorkFlowsEnum.GetMoviesWorkFlow) }
+            };
+
+            var result = await this.webApiService.PostAsync("http://poc.orchestration.orchestrator:8080/api/workflow", JsonSerializer.Serialize(payload), additionalHeaders: headers);
         }
     }
 }
