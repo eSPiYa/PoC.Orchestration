@@ -6,11 +6,11 @@ using System.Text.Json;
 
 namespace PoC.Orchestration.Api.Hubs
 {
-    public class MoviesHub : Hub
+    public class ShowsHub : Hub
     {
         private readonly WebApiService webApiService;
 
-        public MoviesHub(WebApiService webApiService)
+        public ShowsHub(WebApiService webApiService)
         {
             this.webApiService = webApiService;
         }

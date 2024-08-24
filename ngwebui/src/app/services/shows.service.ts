@@ -5,12 +5,12 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class MoviesService {
+export class ShowsService {
   private hubConnection: signalR.HubConnection;
 
   constructor() {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('/hubs/movieshub') // SignalR hub URL
+      .withUrl('/hubs/showshub') // SignalR hub URL
       .build();
   }
 

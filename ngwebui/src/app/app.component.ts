@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms'
-import { MoviesService } from './services/movies.service'
+import { ShowsService } from './services/shows.service'
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   receivedMessage: string = "";
   textBoxValue: string = '';
 
-  constructor(private moviesService: MoviesService) { }
+  constructor(private moviesService: ShowsService) { }
 
   ngOnInit(): void {
     this.moviesService.startConnection().subscribe(() => {

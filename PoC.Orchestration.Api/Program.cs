@@ -31,6 +31,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapHub<MoviesHub>("/hubs/movieshub");
+app.MapHub<ShowsHub>("/hubs/showshub");
 
 app.Run();

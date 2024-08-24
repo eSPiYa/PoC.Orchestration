@@ -10,9 +10,9 @@ namespace PoC.Orchestration.Api.Controllers
     [ApiController]
     public class MoviesListController : ControllerBase
     {
-        private readonly IHubContext<MoviesHub> hubContext;
+        private readonly IHubContext<ShowsHub> hubContext;
 
-        public MoviesListController(IHubContext<MoviesHub> hubContext)
+        public MoviesListController(IHubContext<ShowsHub> hubContext)
         {
             this.hubContext = hubContext;
         }
