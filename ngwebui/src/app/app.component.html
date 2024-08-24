@@ -280,13 +280,30 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<button type="button" (click)="getMovies()">Get Movies</button>
-
-@if(moviesList && moviesList.results && moviesList.results.length > 0){
-  @for(movie of moviesList.results; track movie.id){
-  <div>
-    Title: {{movie.title}}
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <button type="button" (click)="getMovies()" class="btn btn-primary">Get Movies</button>
+    </div>
+    <div class="col-md-12">
+      <div class="col-md-3">
+        <div class="container">
+          <h1>Popular</h1>
+          <ol class="list-group list-group-numbered">
+            @if(moviesList && moviesList.results && moviesList.results.length > 0){
+            @for(movie of moviesList.results; track movie.id){
+            <li class="list-group-item">
+              {{movie.title}}
+            </li>
+            }
+            }
+          </ol>
+        </div>
+        
+        
+      </div>
+    </div>
   </div>
-  }
-}
+</div>
+
 <router-outlet />
