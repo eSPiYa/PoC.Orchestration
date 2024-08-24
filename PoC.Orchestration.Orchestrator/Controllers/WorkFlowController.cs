@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PoC.Orchestration.Orchestrator.WorkFlows.Movies.DataModels;
+using PoC.Orchestration.Orchestrator.WorkFlows.Shows.DataModels;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using WorkflowCore.Interface;

@@ -8,6 +8,7 @@ namespace PoC.Orchestration.Common.WorkFlows
 {
     public enum WorkFlowsEnum
     {
-        GetMoviesWorkFlow
+        GetMoviesWorkFlow,
+        GetShowsListsWorkFlow
     }
 }

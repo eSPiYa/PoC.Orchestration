@@ -31,5 +31,16 @@ namespace PoC.Orchestration.Api.Hubs
 
             var result = await this.webApiService.PostAsync("http://poc.orchestration.orchestrator:8080/api/workflow", JsonSerializer.Serialize(payload), additionalHeaders: headers);
         }
+
+        public async Task GetShowsLists()
+        {
+            var headers = new Dictionary<string, string>()
+            {
+                { "connectionId", this.Context.ConnectionId },
+                { "workflowId", nameof(WorkFlowsEnum.GetShowsListsWorkFlow) }
+            };
+
+            var result = await this.webApiService.PostAsync("http://poc.orchestration.orchestrator:8080/api/workflow", "{ }", additionalHeaders: headers);
+        }
     }
 }

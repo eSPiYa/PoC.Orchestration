@@ -1,6 +1,6 @@
 ﻿using PoC.Orchestration.Common.Models;
 
-namespace PoC.Orchestration.Orchestrator.WorkFlows.Movies.DataModels
+namespace PoC.Orchestration.Orchestrator.WorkFlows.Shows.DataModels
 {
     public class GetMoviesSaga: GetMoviesModel
     {

@@ -1,5 +1,5 @@
 ﻿using PoC.Orchestration.Common.WorkFlows;
-using PoC.Orchestration.Orchestrator.WorkFlows.Movies.DataModels;
+using PoC.Orchestration.Orchestrator.WorkFlows.Shows.DataModels;
 using PoC.Orchestration.Orchestrator.WorkFlows.Steps;
 using PoCPoC.Orchestration.Orchestrator.WorkFlows.Steps;
 using System.Net.Http;
@@ -7,7 +7,7 @@ using System.Text;
 using WorkflowCore.Interface;
 using WorkflowCore.Models;
 
-namespace PoC.Orchestration.Orchestrator.WorkFlows.Movies
+namespace PoC.Orchestration.Orchestrator.WorkFlows.Shows
 {
     public class GetMoviesWorkFlow : IWorkflow<GetMoviesSaga>
     {

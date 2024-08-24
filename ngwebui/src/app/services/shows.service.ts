@@ -38,7 +38,43 @@ export class ShowsService {
     });
   }
 
+  receiveMoviesListNowPlaying(): Observable<string> {
+    return new Observable<string>((observer) => {
+      this.hubConnection.on('receiveMoviesListNowPlaying', (message: string) => {
+        observer.next(message);
+      });
+    });
+  }
+
+  receiveMoviesListPopular(): Observable<string> {
+    return new Observable<string>((observer) => {
+      this.hubConnection.on('receiveMoviesListPopular', (message: string) => {
+        observer.next(message);
+      });
+    });
+  }
+
+  receiveMoviesListTopRated(): Observable<string> {
+    return new Observable<string>((observer) => {
+      this.hubConnection.on('receiveMoviesListTopRated', (message: string) => {
+        observer.next(message);
+      });
+    });
+  }
+
+  receiveMoviesListUpcoming(): Observable<string> {
+    return new Observable<string>((observer) => {
+      this.hubConnection.on('receiveMoviesListUpcoming', (message: string) => {
+        observer.next(message);
+      });
+    });
+  }
+
   getMoviesList(): void {
     this.hubConnection.invoke('GetMoviesList');
+  }
+
+  getShowsLists(): void {
+    this.hubConnection.invoke('GetShowsLists');
   }
 }

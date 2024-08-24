@@ -13,21 +13,53 @@ import { ShowsService } from './services/shows.service'
 export class AppComponent implements OnInit {
   title = 'ngwebui';
   moviesList: any;
+  moviesListNowPlaying: any;
+  moviesListPopular: any;
+  moviesListTopRated: any;
+  moviesListUpcoming: any;
   receivedMessage: string = "";
   textBoxValue: string = '';
 
-  constructor(private moviesService: ShowsService) { }
+  constructor(private showsService: ShowsService) { }
 
   ngOnInit(): void {
-    this.moviesService.startConnection().subscribe(() => {
-      this.moviesService.receiveMoviesList().subscribe((message) => {
+    this.showsService.startConnection().subscribe(() => {
+
+      this.showsService.receiveMoviesList().subscribe((message) => {
         this.moviesList = JSON.parse(message);
         console.log(this.moviesList);
       });
+
+      this.showsService.receiveMoviesListNowPlaying().subscribe((message) => {
+        this.moviesListNowPlaying = JSON.parse(message);
+      });
+
+      this.showsService.receiveMoviesListPopular().subscribe((message) => {
+        this.moviesListPopular = JSON.parse(message);
+      });
+
+      this.showsService.receiveMoviesListTopRated().subscribe((message) => {
+        this.moviesListTopRated = JSON.parse(message);
+      });
+
+      this.showsService.receiveMoviesListUpcoming().subscribe((message) => {
+        this.moviesListUpcoming = JSON.parse(message);
+      });
+
     });
   }
 
   getMovies(): void {
-    this.moviesService.getMoviesList();
+    this.showsService.getMoviesList();
+  }
+
+  getShows(): void {
+
+    this.moviesListNowPlaying = null;
+    this.moviesListPopular = null;
+    this.moviesListTopRated = null;
+    this.moviesListUpcoming = null;
+
+    this.showsService.getShowsLists();
   }
 }

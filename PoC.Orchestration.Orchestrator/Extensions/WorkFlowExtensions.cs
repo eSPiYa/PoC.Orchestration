@@ -1,5 +1,5 @@
-﻿using PoC.Orchestration.Orchestrator.WorkFlows.Movies;
-using PoC.Orchestration.Orchestrator.WorkFlows.Movies.DataModels;
+﻿using PoC.Orchestration.Orchestrator.WorkFlows.Shows;
+using PoC.Orchestration.Orchestrator.WorkFlows.Shows.DataModels;
 using WorkflowCore.Interface;
 
 namespace PoC.Orchestration.Orchestrator.Extensions
@@ -10,6 +10,7 @@ namespace PoC.Orchestration.Orchestrator.Extensions
         {
             var host = serviceProvider.GetService<IWorkflowHost>();
             host!.RegisterWorkflow<GetMoviesWorkFlow, GetMoviesSaga>();
+            host!.RegisterWorkflow<GetShowsListsWorkFlow, GetShowsListsSaga>();
             host.Start();
         }
     }
