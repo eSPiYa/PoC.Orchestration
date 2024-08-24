@@ -1,0 +1,4 @@
+services:
+  poc.orchestration.api:
+    deploy:
+      replicas: 2
