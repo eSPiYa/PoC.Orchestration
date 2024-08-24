@@ -30,6 +30,14 @@ export class ShowsService {
     });
   }
 
+  receiveServerName(): Observable<string> {
+    return new Observable<string>((observer) => {
+      this.hubConnection.on('receiveServerName', (message: string) => {
+        observer.next(message);
+      });
+    });
+  }
+
   receiveMoviesList(): Observable<string> {
     return new Observable<string>((observer) => {
       this.hubConnection.on('ReceiveMoviesList', (message: string) => {

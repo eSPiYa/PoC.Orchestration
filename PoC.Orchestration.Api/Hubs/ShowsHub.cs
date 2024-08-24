@@ -42,5 +42,15 @@ namespace PoC.Orchestration.Api.Hubs
 
             var result = await this.webApiService.PostAsync("http://poc.orchestration.orchestrator:8080/api/workflow", "{ }", additionalHeaders: headers);
         }
+
+        #region Hub
+
+        public override async Task OnConnectedAsync()
+        {
+            await Clients.Client(this.Context.ConnectionId).SendAsync("receiveServerName", Environment.MachineName);
+            await base.OnConnectedAsync();
+        }
+
+        #endregion
     }
 }

@@ -12,6 +12,7 @@ import { ShowsService } from './services/shows.service'
 })
 export class AppComponent implements OnInit {
   title = 'ngwebui';
+  serverName: string = "";
   moviesList: any;
   moviesListNowPlaying: any;
   moviesListPopular: any;
@@ -24,6 +25,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.showsService.startConnection().subscribe(() => {
+
+      this.showsService.receiveServerName().subscribe((message) => {
+        this.serverName = message;
+      });
 
       this.showsService.receiveMoviesList().subscribe((message) => {
         this.moviesList = JSON.parse(message);
