@@ -14,12 +14,14 @@ namespace PoC.Orchestration.Orchestrator.WorkFlows.Shows
         private readonly IConfiguration configuration;
         private readonly string ApiKey;
         private readonly string ApiReadAccessToken;
+        private readonly string signalRServerUrl;
 
         public GetMoviesWorkFlow(IConfiguration configuration)
         {
             this.configuration = configuration;
             this.ApiKey = configuration.GetValue<string>("tmdb:api:key") ?? string.Empty;
             this.ApiReadAccessToken = configuration.GetValue<string>("tmdb:api:ReadAccessToken") ?? string.Empty;
+            this.signalRServerUrl = configuration.GetValue<string>("signalr:server:url")!;
         }
 
         #region IWorkflow
@@ -39,7 +41,7 @@ namespace PoC.Orchestration.Orchestrator.WorkFlows.Shows
                     .Output(data => data.GetMoviesHttpResponse, step => step.ResponseContent)
                 .Then<ApiCallAsync>()
                     .Input(step => step.Method, data => HttpMethod.Post)
-                    .Input(step => step.Url, data => $"http://poc.orchestration.api:8080/api/movieslist")
+                    .Input(step => step.Url, data => $"{this.signalRServerUrl}/api/movieslist")
                     .Input(step => step.AdditionalHeaders, data => new Dictionary<string, string>
                     {
                         { "connectionId", data.ConnectionId! }

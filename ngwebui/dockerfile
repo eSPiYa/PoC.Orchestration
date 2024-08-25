@@ -5,6 +5,8 @@ WORKDIR /app
 
 COPY ./package*.json /app
 
+ARG ENV
+
 # install and cache app dependencies
 RUN npm i
 RUN npm install -g @angular/cli
@@ -18,4 +20,4 @@ COPY . /app
 EXPOSE 4200
 
 # start app
-CMD ng serve --host 0.0.0.0 --poll 100 --ssl
+CMD ng serve --configuration="${ENV}" --host 0.0.0.0 --poll 100 --ssl

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { Observable } from 'rxjs';
+import { } from './../../environments/environment'
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +12,7 @@ export class ShowsService {
 
   constructor() {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('/hubs/showshub') // SignalR hub URL
+      .withUrl(`${environment.baseUrl}${environment.hubsPath}/showshub`) // SignalR hub URL
       .build();
   }
 

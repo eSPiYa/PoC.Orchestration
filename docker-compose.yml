@@ -31,6 +31,8 @@ services:
     build:
       context: ./ngwebui
       dockerfile: dockerfile
+    environment:
+      ENV: "dockered-nginx"
     volumes:      
       - "./ngwebui:/app"
       - alpine-node-modules:/app/node_modules
@@ -43,6 +45,7 @@ services:
       context: .
       dockerfile: PoC.Orchestration.Api/Dockerfile
     environment:
+      - orchestrator__url=http://poc.orchestration.orchestrator:8080
       - tmdb__api__key=${TMDB_API_KEY}
       - tmdb__api__ReadAccessToken=${TMDB_API_READ_ACCESS_TOKEN}
     depends_on:
@@ -55,6 +58,7 @@ services:
       context: .
       dockerfile: PoC.Orchestration.Orchestrator/Dockerfile
     environment:
+      - signalr__server__url=http://poc.orchestration.api:8080
       - tmdb__api__key=${TMDB_API_KEY}
       - tmdb__api__ReadAccessToken=${TMDB_API_READ_ACCESS_TOKEN}
 

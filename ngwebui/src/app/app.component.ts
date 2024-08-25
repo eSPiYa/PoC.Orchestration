@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms'
 import { ShowsService } from './services/shows.service'
+import { environment } from './../environments/environment'
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit {
   receivedMessage: string = "";
   textBoxValue: string = '';
 
-  constructor(private showsService: ShowsService) { }
+  constructor(private showsService: ShowsService) {}
 
   ngOnInit(): void {
     this.showsService.startConnection().subscribe(() => {

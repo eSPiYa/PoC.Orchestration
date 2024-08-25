@@ -50,7 +50,35 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
+            },
+            "dockered": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dockered.ts"
+                }
+              ]
+            },
+            "dockered-nginx": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dockered-nginx.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -63,6 +91,12 @@
             },
             "development": {
               "buildTarget": "ngwebui:build:development"
+            },
+            "dockered": {
+              "buildTarget": "ngwebui:build:dockered"
+            },
+            "dockered-nginx": {
+              "buildTarget": "ngwebui:build:dockered-nginx"
             }
           },
           "defaultConfiguration": "development"

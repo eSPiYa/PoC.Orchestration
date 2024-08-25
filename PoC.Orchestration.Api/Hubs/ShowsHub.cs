@@ -8,11 +8,17 @@ namespace PoC.Orchestration.Api.Hubs
 {
     public class ShowsHub : Hub
     {
+        private readonly IConfiguration configuration;
         private readonly WebApiService webApiService;
+        private readonly string orchestratorUrl;
 
-        public ShowsHub(WebApiService webApiService)
+        public ShowsHub(IConfiguration configuration, 
+                        WebApiService webApiService)
         {
+            this.configuration = configuration;
             this.webApiService = webApiService;
+
+            this.orchestratorUrl = configuration.GetValue<string>("orchestrator:url");
         }
 
         public async Task GetMoviesList()
@@ -29,7 +35,7 @@ namespace PoC.Orchestration.Api.Hubs
                 { "workflowId", nameof(WorkFlowsEnum.GetMoviesWorkFlow) }
             };
 
-            var result = await this.webApiService.PostAsync("http://poc.orchestration.orchestrator:8080/api/workflow", JsonSerializer.Serialize(payload), additionalHeaders: headers);
+            var result = await this.webApiService.PostAsync($"{this.orchestratorUrl}/api/workflow", JsonSerializer.Serialize(payload), additionalHeaders: headers);
         }
 
         public async Task GetShowsLists()
@@ -40,7 +46,7 @@ namespace PoC.Orchestration.Api.Hubs
                 { "workflowId", nameof(WorkFlowsEnum.GetShowsListsWorkFlow) }
             };
 
-            var result = await this.webApiService.PostAsync("http://poc.orchestration.orchestrator:8080/api/workflow", "{ }", additionalHeaders: headers);
+            var result = await this.webApiService.PostAsync($"{this.orchestratorUrl}/api/workflow", "{ }", additionalHeaders: headers);
         }
 
         #region Hub
