@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSignalR()
-                .AddStackExchangeRedis("redis", options =>
+                .AddStackExchangeRedis(builder.Configuration.GetValue<string>("redis:server:host")!, options =>
                 {
                     options.Configuration.ChannelPrefix = RedisChannel.Literal("signalr");
                 });

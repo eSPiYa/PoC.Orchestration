@@ -45,6 +45,7 @@ services:
       context: .
       dockerfile: PoC.Orchestration.Api/Dockerfile
     environment:
+      - redis__server__host=redis
       - orchestrator__url=http://poc.orchestration.orchestrator:8080
       - tmdb__api__key=${TMDB_API_KEY}
       - tmdb__api__ReadAccessToken=${TMDB_API_READ_ACCESS_TOKEN}
