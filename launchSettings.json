@@ -7,7 +7,8 @@
         "poc.orchestration.api": "StartDebugging",
         "pocorchestrationngwebui": "StartWithoutDebugging",
         "proxy": "StartWithoutDebugging",
-        "poc.orchestration.orchestrator": "StartDebugging"
+        "poc.orchestration.orchestrator": "StartDebugging",
+        "redis": "StartWithoutDebugging"
       }
     }
   }
