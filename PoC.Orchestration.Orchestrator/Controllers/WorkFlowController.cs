@@ -13,10 +13,13 @@ namespace PoC.Orchestration.Orchestrator.Controllers
     [ApiController]
     public class WorkFlowController : ControllerBase
     {
+        private readonly ILogger<WorkFlowController> logger;
         private readonly IWorkflowHost workflowHost;
 
-        public WorkFlowController(IWorkflowHost workflowHost)
+        public WorkFlowController(ILogger<WorkFlowController> logger,
+                                  IWorkflowHost workflowHost)
         {
+            this.logger = logger;
             this.workflowHost = workflowHost;
         }
 
@@ -31,6 +34,8 @@ namespace PoC.Orchestration.Orchestrator.Controllers
             {
                 this.workflowHost.StartWorkflow(workflowId, 1, data, connectionId);
             });
+
+            this.logger.LogInformation($"'Execute' of 'WorfLowController' was invoked for WorkFlow '{workflowId}' for ConnectionId '{connectionId}'");
 
             return Ok();
         }
