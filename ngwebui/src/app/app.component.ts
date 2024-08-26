@@ -19,6 +19,10 @@ export class AppComponent implements OnInit {
   moviesListPopular: any;
   moviesListTopRated: any;
   moviesListUpcoming: any;
+  tvListAiringToday: any;
+  tvListOnTheAir: any;
+  tvListPopular: any;
+  tvListTopRated: any;
   receivedMessage: string = "";
   textBoxValue: string = '';
 
@@ -33,23 +37,38 @@ export class AppComponent implements OnInit {
 
       this.showsService.receiveMoviesList().subscribe((message) => {
         this.moviesList = JSON.parse(message);
-        console.log(this.moviesList);
       });
 
       this.showsService.receiveMoviesListNowPlaying().subscribe((message) => {
-        this.moviesListNowPlaying = JSON.parse(message);
+        this.moviesListNowPlaying = JSON.parse(message).results.slice(0, 10);
       });
 
       this.showsService.receiveMoviesListPopular().subscribe((message) => {
-        this.moviesListPopular = JSON.parse(message);
+        this.moviesListPopular = JSON.parse(message).results.slice(0, 10);
       });
 
       this.showsService.receiveMoviesListTopRated().subscribe((message) => {
-        this.moviesListTopRated = JSON.parse(message);
+        this.moviesListTopRated = JSON.parse(message).results.slice(0, 10);
       });
 
       this.showsService.receiveMoviesListUpcoming().subscribe((message) => {
-        this.moviesListUpcoming = JSON.parse(message);
+        this.moviesListUpcoming = JSON.parse(message).results.slice(0, 10);
+      });
+
+      this.showsService.receiveTVListAiringToday().subscribe((message) => {
+        this.tvListAiringToday = JSON.parse(message).results.slice(0, 10);
+      });
+
+      this.showsService.receiveTVListOnTheAir().subscribe((message) => {
+        this.tvListOnTheAir = JSON.parse(message).results.slice(0, 10);
+      });
+
+      this.showsService.receiveTVListPopular().subscribe((message) => {
+        this.tvListPopular = JSON.parse(message).results.slice(0, 10);
+      });
+
+      this.showsService.receiveTVListTopRated().subscribe((message) => {
+        this.tvListTopRated = JSON.parse(message).results.slice(0, 10);
       });
 
     });
@@ -65,6 +84,10 @@ export class AppComponent implements OnInit {
     this.moviesListPopular = null;
     this.moviesListTopRated = null;
     this.moviesListUpcoming = null;
+    this.tvListAiringToday = null;
+    this.tvListOnTheAir = null;
+    this.tvListPopular = null;
+    this.tvListTopRated = null;
 
     this.showsService.getShowsLists();
   }

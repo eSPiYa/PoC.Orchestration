@@ -4,6 +4,7 @@ using PoC.Orchestration.Orchestrator.WorkFlows.Steps;
 using PoCPoC.Orchestration.Orchestrator.WorkFlows.Steps;
 using System.Text;
 using WorkflowCore.Interface;
+using WorkflowCore.Models;
 
 namespace PoC.Orchestration.Orchestrator.WorkFlows.Shows
 {
@@ -100,6 +101,80 @@ namespace PoC.Orchestration.Orchestrator.WorkFlows.Shows
                                 })
                                 .Input(step => step.HttpContent, data => new StringContent(data.ResponseContentUpcoming!, Encoding.UTF8, "application/json"))
                     )
+                .Join()
+                .Then(then => {
+                    Thread.Sleep(5000);
+                    return ExecutionResult.Next();
+                })
+                .Parallel()
+                    .Do(then =>
+                        then.StartWith<ApiCallAsync>()
+                                .Input(step => step.Method, data => HttpMethod.Get)
+                                .Input(step => step.Url, data => $"https://api.themoviedb.org/3/tv/airing_today?language=en-US&page={1}")
+                                .Input(step => step.ApiKey, data => this.ApiKey)
+                                .Input(step => step.BearerToken, data => this.ApiReadAccessToken)
+                                .Output(data => data.ResponseContentTVAiringToday, step => step.ResponseContent)
+                            .Then<ApiCallAsync>()
+                                .Input(step => step.Method, data => HttpMethod.Post)
+                                .Input(step => step.Url, data => $"{this.signalRServerUrl}/api/showslists")
+                                .Input(step => step.AdditionalHeaders, data => new Dictionary<string, string>
+                                {
+                                    { "connectionId", data.ConnectionId! },
+                                    { "actionName", "receiveTVListAiringToday"}
+                                })
+                                .Input(step => step.HttpContent, data => new StringContent(data.ResponseContentTVAiringToday!, Encoding.UTF8, "application/json"))
+                    )
+                    .Do(then =>
+                        then.StartWith<ApiCallAsync>()
+                                .Input(step => step.Method, data => HttpMethod.Get)
+                                .Input(step => step.Url, data => $"https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page={1}")
+                                .Input(step => step.ApiKey, data => this.ApiKey)
+                                .Input(step => step.BearerToken, data => this.ApiReadAccessToken)
+                                .Output(data => data.ResponseContentTVOnTheAir, step => step.ResponseContent)
+                            .Then<ApiCallAsync>()
+                                .Input(step => step.Method, data => HttpMethod.Post)
+                                .Input(step => step.Url, data => $"{this.signalRServerUrl}/api/showslists")
+                                .Input(step => step.AdditionalHeaders, data => new Dictionary<string, string>
+                                {
+                                    { "connectionId", data.ConnectionId! },
+                                    { "actionName", "receiveTVListOnTheAir"}
+                                })
+                                .Input(step => step.HttpContent, data => new StringContent(data.ResponseContentTVOnTheAir!, Encoding.UTF8, "application/json"))
+                    )
+                    .Do(then =>
+                        then.StartWith<ApiCallAsync>()
+                                .Input(step => step.Method, data => HttpMethod.Get)
+                                .Input(step => step.Url, data => $"https://api.themoviedb.org/3/tv/popular?language=en-US&page={1}")
+                                .Input(step => step.ApiKey, data => this.ApiKey)
+                                .Input(step => step.BearerToken, data => this.ApiReadAccessToken)
+                                .Output(data => data.ResponseContentTVPopular, step => step.ResponseContent)
+                            .Then<ApiCallAsync>()
+                                .Input(step => step.Method, data => HttpMethod.Post)
+                                .Input(step => step.Url, data => $"{this.signalRServerUrl}/api/showslists")
+                                .Input(step => step.AdditionalHeaders, data => new Dictionary<string, string>
+                                {
+                                    { "connectionId", data.ConnectionId! },
+                                    { "actionName", "receiveTVListPopular"}
+                                })
+                                .Input(step => step.HttpContent, data => new StringContent(data.ResponseContentTVPopular!, Encoding.UTF8, "application/json"))
+                    )
+                    .Do(then =>
+                        then.StartWith<ApiCallAsync>()
+                                .Input(step => step.Method, data => HttpMethod.Get)
+                                .Input(step => step.Url, data => $"https://api.themoviedb.org/3/tv/top_rated?language=en-US&page={1}")
+                                .Input(step => step.ApiKey, data => this.ApiKey)
+                                .Input(step => step.BearerToken, data => this.ApiReadAccessToken)
+                                .Output(data => data.ResponseContentTVTopRated, step => step.ResponseContent)
+                            .Then<ApiCallAsync>()
+                                .Input(step => step.Method, data => HttpMethod.Post)
+                                .Input(step => step.Url, data => $"{this.signalRServerUrl}/api/showslists")
+                                .Input(step => step.AdditionalHeaders, data => new Dictionary<string, string>
+                                {
+                                    { "connectionId", data.ConnectionId! },
+                                    { "actionName", "receiveTVListTopRated"}
+                                })
+                                .Input(step => step.HttpContent, data => new StringContent(data.ResponseContentTVTopRated!, Encoding.UTF8, "application/json"))
+                    )                    
                 .Join()
                 .EndWorkflow();
         }

@@ -12,6 +12,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["PoC.Orchestration.Orchestrator/PoC.Orchestration.Orchestrator.csproj", "PoC.Orchestration.Orchestrator/"]
+COPY ["PoC.Orchestration.Common/PoC.Orchestration.Common.csproj", "PoC.Orchestration.Common/"]
 RUN dotnet restore "./PoC.Orchestration.Orchestrator/PoC.Orchestration.Orchestrator.csproj"
 COPY . .
 WORKDIR "/src/PoC.Orchestration.Orchestrator"

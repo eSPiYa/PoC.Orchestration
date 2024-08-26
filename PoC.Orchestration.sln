@@ -8,10 +8,14 @@ EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F171761D-1EE9-4746-AD81-721F59C49BCA}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "ngwebui", "ngwebui\ngwebui.esproj", "{FF604FA7-8050-4250-B4D5-537279E47DB6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{66EFF42D-8D7B-4D36-9D5E-0FC869953336} = {66EFF42D-8D7B-4D36-9D5E-0FC869953336}
+		{DA22A1A8-6124-44E2-B4EB-C4972ABD41BA} = {DA22A1A8-6124-44E2-B4EB-C4972ABD41BA}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoC.Orchestration.Orchestrator", "PoC.Orchestration.Orchestrator\PoC.Orchestration.Orchestrator.csproj", "{DA22A1A8-6124-44E2-B4EB-C4972ABD41BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoC.Orchestration.Orchestrator", "PoC.Orchestration.Orchestrator\PoC.Orchestration.Orchestrator.csproj", "{DA22A1A8-6124-44E2-B4EB-C4972ABD41BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoC.Orchestration.Common", "PoC.Orchestration.Common\PoC.Orchestration.Common.csproj", "{811F73CD-790C-42DD-9E8B-225A77D2EFA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoC.Orchestration.Common", "PoC.Orchestration.Common\PoC.Orchestration.Common.csproj", "{811F73CD-790C-42DD-9E8B-225A77D2EFA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

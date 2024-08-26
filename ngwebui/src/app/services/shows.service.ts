@@ -80,6 +80,38 @@ export class ShowsService {
     });
   }
 
+  receiveTVListAiringToday(): Observable<string> {
+    return new Observable<string>((observer) => {
+      this.hubConnection.on('receiveTVListAiringToday', (message: string) => {
+        observer.next(message);
+      });
+    });
+  }
+
+  receiveTVListOnTheAir(): Observable<string> {
+    return new Observable<string>((observer) => {
+      this.hubConnection.on('receiveTVListOnTheAir', (message: string) => {
+        observer.next(message);        
+      });
+    });
+  }
+
+  receiveTVListPopular(): Observable<string> {
+    return new Observable<string>((observer) => {
+      this.hubConnection.on('receiveTVListPopular', (message: string) => {
+        observer.next(message);
+      });
+    });
+  }
+
+  receiveTVListTopRated(): Observable<string> {
+    return new Observable<string>((observer) => {
+      this.hubConnection.on('receiveTVListTopRated', (message: string) => {
+        observer.next(message);
+      });
+    });
+  }
+
   getMoviesList(): void {
     this.hubConnection.invoke('GetMoviesList');
   }

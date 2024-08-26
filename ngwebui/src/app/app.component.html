@@ -13,13 +13,13 @@
 
 <main class="main">
   <div class="container">
-    
+
     <div class="row">
       <div class="col-md-2">
         <button type="button" (click)="getShows()" class="btn btn-primary">Get Shows</button>
       </div>
       <div class="col-md-10">
-        <h2>Server Name: {{serverName}}</h2> 
+        <h2>Server Name: {{serverName}}</h2>
       </div>
     </div>
 
@@ -32,8 +32,8 @@
       <div class="col-md-3">
         <h3>Now Playing</h3>
         <ol class="list-group list-group-numbered">
-          @if(moviesListNowPlaying && moviesListNowPlaying.results && moviesListNowPlaying.results.length > 0){
-          @for(movie of moviesListNowPlaying.results; track movie.id){
+          @if(moviesListNowPlaying && moviesListNowPlaying.length > 0){
+          @for(movie of moviesListNowPlaying; track movie.id){
           <li class="list-group-item">
             {{movie.title}}
           </li>
@@ -45,8 +45,8 @@
       <div class="col-md-3">
         <h3>Popular</h3>
         <ol class="list-group list-group-numbered">
-          @if(moviesListPopular && moviesListPopular.results && moviesListPopular.results.length > 0){
-          @for(movie of moviesListPopular.results; track movie.id){
+          @if(moviesListPopular && moviesListPopular.length > 0){
+          @for(movie of moviesListPopular; track movie.id){
           <li class="list-group-item">
             {{movie.title}}
           </li>
@@ -58,8 +58,8 @@
       <div class="col-md-3">
         <h3>Top Rated</h3>
         <ol class="list-group list-group-numbered">
-          @if(moviesListTopRated && moviesListTopRated.results && moviesListTopRated.results.length > 0){
-          @for(movie of moviesListTopRated.results; track movie.id){
+          @if(moviesListTopRated && moviesListTopRated.length > 0){
+          @for(movie of moviesListTopRated; track movie.id){
           <li class="list-group-item">
             {{movie.title}}
           </li>
@@ -71,10 +71,70 @@
       <div class="col-md-3">
         <h3>Upcoming</h3>
         <ol class="list-group list-group-numbered">
-          @if(moviesListUpcoming && moviesListUpcoming.results && moviesListUpcoming.results.length > 0){
-          @for(movie of moviesListUpcoming.results; track movie.id){
+          @if(moviesListUpcoming && moviesListUpcoming.length > 0){
+          @for(movie of moviesListUpcoming; track movie.id){
           <li class="list-group-item">
             {{movie.title}}
+          </li>
+          }
+          }
+        </ol>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <h2 class="text-center">TV Shows</h2>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-3">
+        <h3>Airing Today</h3>
+        <ol class="list-group list-group-numbered">
+          @if(tvListAiringToday && tvListAiringToday.length > 0){
+          @for(show of tvListAiringToday; track show.id){
+          <li class="list-group-item">
+            {{show.name}}
+          </li>
+          }
+          }
+        </ol>
+      </div>
+
+      <div class="col-md-3">
+        <h3>On The Air</h3>
+        <ol class="list-group list-group-numbered">
+          @if(tvListOnTheAir && tvListOnTheAir.length > 0){
+          @for(show of tvListOnTheAir; track show.id){
+          <li class="list-group-item">
+            {{show.name}}
+          </li>
+          }
+          }
+        </ol>
+      </div>
+
+      <div class="col-md-3">
+        <h3>Popular</h3>
+        <ol class="list-group list-group-numbered">
+          @if(tvListPopular && tvListPopular.length > 0){
+          @for(show of tvListPopular; track show.id){
+          <li class="list-group-item">
+            {{show.name}}
+          </li>
+          }
+          }
+        </ol>
+      </div>
+
+      <div class="col-md-3">
+        <h3>Top Rated</h3>
+        <ol class="list-group list-group-numbered">
+          @if(tvListTopRated && tvListTopRated.length > 0){
+          @for(show of tvListTopRated; track show.id){
+          <li class="list-group-item">
+            {{show.name}}
           </li>
           }
           }
