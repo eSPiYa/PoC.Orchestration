@@ -2,3 +2,7 @@ services:
   poc.orchestration.api:
     deploy:
       replicas: 2
+
+  poc.orchestration.orchestrator:
+    deploy:
+      replicas: 2
