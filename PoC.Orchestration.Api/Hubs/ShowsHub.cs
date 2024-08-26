@@ -18,7 +18,7 @@ namespace PoC.Orchestration.Api.Hubs
             this.configuration = configuration;
             this.webApiService = webApiService;
 
-            this.orchestratorUrl = configuration.GetValue<string>("orchestrator:url");
+            this.orchestratorUrl = configuration.GetValue<string>("orchestrator:url")!;
         }
 
         public async Task GetMoviesList()
