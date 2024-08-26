@@ -8,13 +8,16 @@ namespace PoC.Orchestration.Api.Hubs
 {
     public class ShowsHub : Hub
     {
+        private readonly ILogger<ShowsHub> logger;
         private readonly IConfiguration configuration;
         private readonly WebApiService webApiService;
         private readonly string orchestratorUrl;
 
-        public ShowsHub(IConfiguration configuration, 
+        public ShowsHub(ILogger<ShowsHub> logger,
+                        IConfiguration configuration, 
                         WebApiService webApiService)
         {
+            this.logger = logger;
             this.configuration = configuration;
             this.webApiService = webApiService;
 
@@ -36,6 +39,8 @@ namespace PoC.Orchestration.Api.Hubs
             };
 
             var result = await this.webApiService.PostAsync($"{this.orchestratorUrl}/api/workflow", JsonSerializer.Serialize(payload), additionalHeaders: headers);
+
+            this.logger.LogInformation($"Connection '{this.Context.ConnectionId}' invoked 'GetMoviesList'");
         }
 
         public async Task GetShowsLists()
@@ -47,6 +52,8 @@ namespace PoC.Orchestration.Api.Hubs
             };
 
             var result = await this.webApiService.PostAsync($"{this.orchestratorUrl}/api/workflow", "{ }", additionalHeaders: headers);
+
+            this.logger.LogInformation($"Connection '{this.Context.ConnectionId}' invoked 'GetShowsLists'");
         }
 
         #region Hub
@@ -55,6 +62,8 @@ namespace PoC.Orchestration.Api.Hubs
         {
             await Clients.Client(this.Context.ConnectionId).SendAsync("receiveServerName", Environment.MachineName);
             await base.OnConnectedAsync();
+
+            this.logger.LogInformation($"Connection '{this.Context.ConnectionId}' was established.");
         }
 
         #endregion

@@ -10,10 +10,13 @@ namespace PoC.Orchestration.Api.Controllers
     [ApiController]
     public class ShowsListsController : ControllerBase
     {
+        private readonly ILogger<ShowsListsController> logger;
         private readonly IHubContext<ShowsHub> hubContext;
 
-        public ShowsListsController(IHubContext<ShowsHub> hubContext)
+        public ShowsListsController(ILogger<ShowsListsController> logger,
+                                    IHubContext<ShowsHub> hubContext)
         {
+            this.logger = logger;
             this.hubContext = hubContext;
         }
 
@@ -24,6 +27,8 @@ namespace PoC.Orchestration.Api.Controllers
                    actionName = this.HttpContext.Request.Headers["actionName"].FirstOrDefault()!;
 
             await this.hubContext.Clients.Client(connectionId).SendAsync(actionName, ((JsonElement)body).ToString());
+
+            this.logger.LogInformation($"'ReceiveShowsLists' was invoked for ConnectionId '{connectionId}' and Action '{actionName}'");
 
             return Ok();
         }
