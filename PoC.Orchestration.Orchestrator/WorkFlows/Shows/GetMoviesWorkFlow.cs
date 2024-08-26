@@ -11,13 +11,16 @@ namespace PoC.Orchestration.Orchestrator.WorkFlows.Shows
 {
     public class GetMoviesWorkFlow : IWorkflow<GetMoviesSaga>
     {
+        private readonly ILogger<GetMoviesWorkFlow> logger;
         private readonly IConfiguration configuration;
         private readonly string ApiKey;
         private readonly string ApiReadAccessToken;
         private readonly string signalRServerUrl;
 
-        public GetMoviesWorkFlow(IConfiguration configuration)
+        public GetMoviesWorkFlow(ILogger<GetMoviesWorkFlow> logger,
+                                 IConfiguration configuration)
         {
+            this.logger = logger;
             this.configuration = configuration;
             this.ApiKey = configuration.GetValue<string>("tmdb:api:key") ?? string.Empty;
             this.ApiReadAccessToken = configuration.GetValue<string>("tmdb:api:ReadAccessToken") ?? string.Empty;
@@ -33,6 +36,13 @@ namespace PoC.Orchestration.Orchestrator.WorkFlows.Shows
             builder
                 .StartWith<GetConnectionId>()
                     .Output(data => data.ConnectionId, step => step.ConnectionId)
+                .Then(context =>
+                {
+                    var data = (GetMoviesSaga)context.Workflow.Data;
+                    this.logger.LogInformation($"WorkFlow 'GetMoviesWorkFlow' started for ConnectionId '{data.ConnectionId}'");
+
+                    return ExecutionResult.Next();
+                })
                 .Then<ApiCallAsync>()
                     .Input(step => step.Method, data => HttpMethod.Get)
                     .Input(step => step.Url, data => $"https://api.themoviedb.org/3/movie/{data.FetchType}?language={data.LanguageCode}&page={data.Page}")
@@ -47,6 +57,13 @@ namespace PoC.Orchestration.Orchestrator.WorkFlows.Shows
                         { "connectionId", data.ConnectionId! }
                     })
                     .Input(step => step.HttpContent, data => new StringContent(data.GetMoviesHttpResponse!, Encoding.UTF8, "application/json"))
+                .Then(context =>
+                {
+                    var data = (GetMoviesSaga)context.Workflow.Data;
+                    this.logger.LogInformation($"WorkFlow 'GetMoviesWorkFlow' ended for ConnectionId '{data.ConnectionId}'");
+
+                    return ExecutionResult.Next();
+                })
                 .EndWorkflow();
         }
         #endregion
