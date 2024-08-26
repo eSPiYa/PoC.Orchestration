@@ -12,6 +12,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
     <PackageReference Include="WorkflowCore" Version="3.10.0" />
+    <PackageReference Include="WorkflowCore.Providers.Redis" Version="3.10.0" />
   </ItemGroup>
 
   <ItemGroup>

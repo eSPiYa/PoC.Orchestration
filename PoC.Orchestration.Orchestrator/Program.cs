@@ -9,7 +9,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddWorkflow();
+builder.Services.AddWorkflow(cfg =>
+{
+    var redisHost = builder.Configuration.GetValue<string>("redis:server:host")!;
+
+    cfg.UseRedisPersistence(redisHost, "orchestrator");
+    cfg.UseRedisLocking(redisHost);
+    cfg.UseRedisQueues(redisHost, "orchestrator");
+    cfg.UseRedisEventHub(redisHost, "orchestration");
+});
 
 var app = builder.Build();
 
