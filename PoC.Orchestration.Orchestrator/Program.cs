@@ -1,6 +1,8 @@
 using PoC.Orchestration.Orchestrator.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
 
 // Add services to the container.
 
