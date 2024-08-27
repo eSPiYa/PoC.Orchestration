@@ -1,0 +1,12 @@
+graph TD
+	%% Nodes
+	WebUI("Web UI")
+	Hub("Hub Server")
+	Orch("Orchestrator")
+	Serv("Services")
+
+	WebUI -- SignalR(GetMoviesList) --> Hub
+	Hub -- API(workflow) --> Orch
+	Orch <-- API(call-response) --> Serv
+	Orch -- API(showslist) --> Hub
+	Hub -- SignalR(client methods) --> WebUI

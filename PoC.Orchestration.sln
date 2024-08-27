@@ -9,9 +9,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoC.Orchestration.Common", 
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "ngwebui", "ngwebui\ngwebui.esproj", "{54F34A16-3B1E-4183-BB26-146F13966926}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoC.Orchestration.Orchestrator", "PoC.Orchestration.Orchestrator\PoC.Orchestration.Orchestrator.csproj", "{8CAA9961-7C9C-4EFF-A4AD-8D4ABF12EBB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoC.Orchestration.Orchestrator", "PoC.Orchestration.Orchestrator\PoC.Orchestration.Orchestrator.csproj", "{8CAA9961-7C9C-4EFF-A4AD-8D4ABF12EBB9}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{CA201CC9-292C-4A04-94D7-5D19FF536C7B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{05F05819-C647-4E8B-B163-4E0C1EF97ECA}"
+	ProjectSection(SolutionItems) = preProject
+		DIAGRAM.mmd = DIAGRAM.mmd
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
