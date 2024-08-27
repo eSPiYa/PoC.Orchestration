@@ -63,6 +63,9 @@ services:
       - signalr__server__url=http://poc.orchestration.api:8080
       - tmdb__api__key=${TMDB_API_KEY}
       - tmdb__api__ReadAccessToken=${TMDB_API_READ_ACCESS_TOKEN}
+    depends_on:
+      redis:
+        condition: service_healthy
 
 secrets:
   nginx.cert: 
