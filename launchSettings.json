@@ -4,11 +4,10 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "poc.orchestration.api": "StartDebugging",
-        "pocorchestrationngwebui": "StartWithoutDebugging",
+        "redis": "StartWithoutDebugging",
         "proxy": "StartWithoutDebugging",
-        "poc.orchestration.orchestrator": "StartDebugging",
-        "redis": "StartWithoutDebugging"
+        "poc.orchestration.api": "StartDebugging",
+        "poc.orchestration.orchestrator": "StartDebugging"
       }
     }
   }

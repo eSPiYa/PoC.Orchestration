@@ -4,7 +4,7 @@
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
     <DockerPublishLocally>False</DockerPublishLocally>
-    <ProjectGuid>f171761d-1ee9-4746-ad81-721f59c49bca</ProjectGuid>
+    <ProjectGuid>ca201cc9-292c-4a04-94d7-5d19ff536c7b</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/</DockerServiceUrl>
     <DockerServiceName>pocorchestrationngwebui</DockerServiceName>
